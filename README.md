@@ -1,5 +1,5 @@
 
-### https://valvic66.github.io/vue01/
+### https://valvic66.github.io/vueshoppingcart/
 
 > A Vue.js project
 

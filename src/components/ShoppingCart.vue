@@ -1,19 +1,25 @@
 <template>
   <div class="cart">
-    <h3 class="cart-title">SHOPPING CART</h3>
+    <h4 class="cart-title">Your Cart</h4>
     <div class="cart-item" v-for="(item, index) in items" v-bind:key="index">
-      <img :src="item.image" class="cart-item-img">
+      <div class="cart-item-img">
+        <img :src="item.image">
+      </div>
+      
       <div class="info-wrapper">
         <div class="cart-item-title">{{ item.title }}</div>
         <div class="price-q-wrapper">
           <div class="cart-item-qty">x{{ item.qty }}</div>
-          <div class="cart-item-price">$ {{ item.qty * item.price }}</div>
+          <div class="cart-item-price">{{ item.qty * item.price }} RON</div>
         </div>
       </div>
     </div>
     <div class="cart-total">
       <div class="cart-total-title">TOTAL</div>
-      <div class="cart-total-amount">$ {{ total }}</div>
+      <div class="cart-total-amount">{{ total }} RON</div>
+    </div>
+    <div class="cart-total-close">
+      <b-button size="sm" variant="primary" @click="onCloseCart">Close</b-button>
     </div>
   </div>
 </template>
@@ -31,6 +37,11 @@ export default {
       items: State.data.cart
     }
   },
+  methods: {
+    onCloseCart: function () {
+      this.$emit('clickclosecart')
+    }
+  },
   computed: {
     total: function () {
       return _.sumBy(this.items, function (item) {
@@ -46,10 +57,10 @@ export default {
 .cart {
   // background-color: lightcoral;
   box-shadow: 2px 2px 5px black;
+  background-color: white;
 
-  margin-top: 30px;
-  width: 200px;
   padding: 5px;
+  width: 100%;
 
   display: flex;
   flex-direction: column;
@@ -65,18 +76,25 @@ export default {
 
     margin-bottom: 5px;
     padding: 2px;
+    width: 100%;
 
     display: flex;
-    flex-direction: row;
     align-items: center;
 
     .cart-item-img {
-      width: 60px;
-      height: 60px;
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
+    .cart-item-img img {
+      max-width: 60px;
+    } 
     .info-wrapper {
       padding-left: 5px;
-      .cart-item-title {
+      flex: 4;
+
+    .cart-item-title {
       }
       .price-q-wrapper {
         display: flex;
@@ -91,8 +109,8 @@ export default {
     }
   }
   .cart-total {
-    width: 100%;
     margin: 10px 0;
+    width: 100%;
 
     display: flex;
     flex-direction: row;

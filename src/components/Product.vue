@@ -3,14 +3,14 @@
     <img :src="product.image" class="product-image">
     <div class="product-title">{{ product.title }}</div>
     <div class="product-price">
-      <div class="product-price-amount">$ {{ product.price }}</div>
+      <div class="product-price-amount">{{ product.price }} RON</div>
       <div class="product-price-qty">x {{ quantityInCart }}</div>
     </div>
     <div class="product-button">
-      <button @click="addToCart" class="product-button-add" v-if="quantityInCart == 0">Add</button>
+      <b-btn size="sm" variant="primary" @click="addToCart" class="product-button-add" v-if="quantityInCart == 0">Add</b-btn>
       <div class="product-button-wrapper" v-else>
-        <button @click="increaseCart" class="product-button-increase">+</button>
-        <button @click="decreaseCart" class="product-button-decrease">-</button>
+        <b-btn size="sm" variant="primary" @click="increaseCart" class="product-button-increase">+</b-btn>
+        <b-btn size="sm" variant="primary" @click="decreaseCart" class="product-button-decrease">-</b-btn>
       </div>
     </div>  
   </div>
@@ -61,7 +61,6 @@ $card-color: white;
   background-color: $card-color;
   box-shadow: 2px 2px 5px black;
 
-  width: 200px;
   padding: 5px;
 
   display: flex;
